@@ -1,0 +1,33 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Shoot : MonoBehaviour
+{
+
+    public GameObject ballPrefab;
+    public Transform ShootingPoint;
+    public float ShootForce;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Shooting();
+            
+        }
+    }
+
+    private void Shooting()
+    {
+        GameObject ball = Instantiate(ballPrefab, ShootingPoint.position, ShootingPoint.rotation);
+
+        Rigidbody rb = ball.GetComponent<Rigidbody>();
+        
+        if (rb != null)
+        {
+            rb.AddForce(ShootingPoint.forward * ShootForce);
+        } 
+        Destroy(ball, 3f);
+    }
+}
