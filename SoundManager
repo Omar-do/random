@@ -1,0 +1,13 @@
+using UnityEngine;
+
+public class SoundManager : MonoBehaviour
+{
+    public AudioSource audioSource;   // مكان تشغيل الصوت
+    public AudioClip pickupSound;     // ملف صوت معين
+
+    // دالة لتشغيل الصوت
+    public void PlayPickupSound()
+    {
+        audioSource.PlayOneShot(pickupSound);
+    }
+}
