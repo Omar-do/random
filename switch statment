@@ -1,0 +1,16 @@
+    private void OnCollisionEnter(Collision other)
+    {
+        switch (other.gameObject.tag)
+        {
+            case "Save":
+                Debug.Log("save");
+                break;
+            case "Finish":
+                Debug.Log("Done");
+                FinishCrash();
+                break;
+            default:
+                StartCrash();
+                break;
+        }
+    }
