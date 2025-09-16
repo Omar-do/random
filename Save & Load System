@@ -1,0 +1,38 @@
+using UnityEngine;
+
+public class SaveSystem : MonoBehaviour
+{
+    int score = 0;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            score++;
+            Debug.Log("Score: " + score);
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            SaveScore();
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadScore();
+        }
+    }
+
+    void SaveScore()
+    {
+        PlayerPrefs.SetInt("PlayerScore", score);
+        PlayerPrefs.Save();
+        Debug.Log("Score Saved!");
+    }
+
+    void LoadScore()
+    {
+        score = PlayerPrefs.GetInt("PlayerScore", 0); 
+        Debug.Log("Score Loaded: " + score);
+    }
+}
