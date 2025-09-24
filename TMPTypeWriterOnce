@@ -1,0 +1,44 @@
+using UnityEngine;
+using TMPro;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+
+public class TMPTypeWriterOnce : MonoBehaviour
+{
+    [Header("Text Settings")]
+    public TMP_Text dialogueText;
+    [TextArea] public string fullText;// the text that went to Write it
+    public float delay = 0.05f;// time between letters
+
+    // نخزن المشاهد اللي انعرض فيها النصوص
+    private static Dictionary<string, bool> scenePlayed = new Dictionary<string, bool>();
+
+    void Start()
+    {
+        string currentScene = SceneManager.GetActiveScene().name;// current scene
+
+        if (!scenePlayed.ContainsKey(currentScene) || scenePlayed[currentScene] == false)
+        {
+            // أول مرة في هذا المشهد → يشتغل الأنيميشن
+            StartCoroutine(ShowText());
+            scenePlayed[currentScene] = true;
+        }
+        else
+        {
+            // إذا رجع لنفس المشهد في نفس الجلسة → يطلع النص كامل
+            dialogueText.text = fullText;
+        }
+    }
+
+    IEnumerator ShowText()
+    {
+        dialogueText.text = "";// text = nothing
+
+        foreach (char letter in fullText.ToCharArray())
+        {
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(delay);
+        }
+    }
+}
