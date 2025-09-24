@@ -1,0 +1,18 @@
+using UnityEngine;
+
+
+public class floats : MonoBehaviour
+{
+    public Rigidbody rb;
+    public float speed = 5f;
+
+    void Start()
+    {
+        if (rb == null)
+            rb = GetComponent<Rigidbody>();
+
+        rb.useGravity = false; 
+        rb.velocity = new Vector3(speed, speed, 0f); 
+    }
+}
+
